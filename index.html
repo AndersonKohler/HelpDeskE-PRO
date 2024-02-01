@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOHLER E-PRO - Cadastro</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="basic">
+    <div class="layout">
+        <img src="img/kohler.svg">
+    </div>
+    <div class="kohlerimg">
+         <img src="img/kohler_compras.svg">
+    </div>
+    <div class="kohlerpro">
+        <img src="img/e-pro.svg">
+    </div>
+   <div class="line_k">
+    <img src="img/line.svg">
+    </div>
+</div>
+
+<div class="border">
+  <h2>Chatbot</h2>
+</div>
+
+  <div class="chat-container">
+    <div id="message-container">
+      <div class="message bot-message">
+        <p>Olá! Bem-vindo ao <strong>CHAT DE COMPRAS!</strong><br><br> Acesse por gentileza o link em seu email, você será redirecionado para a página de login! Deverá preencher as informações conforme recebidas no e-mail, e será redirecionado para alteração de senha. <br><br> Obs: A palavra passe antiga, é enviada no e-mail, e você precisará criar uma senha que deverá conter: Mínimo de 8 caracteres, letra maiúscula, letra minúscula, número, caractere especial. Ao alterar a senha será direcionado para o portal da Kohler. <br><br> Digite: OK para avançar.</p>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+    </div>
+    
+  </div>
+  <script>
+
+    var container = document.querySelector('.chat-container');
+setTimeout(function() {
+  container.scrollTop = container.scrollHeight;
+}, 100);
+    // Lógica de programação em JavaScript
+const messageContainer = document.getElementById('message-container');
+const userInput = document.getElementById('user-input');
+
+function addUserMessage(message) {
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message', 'user-message');
+  messageElement.innerHTML = `<p>${message}</p>`;
+  messageContainer.appendChild(messageElement);
+}
+
+function addBotMessage(message) {
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message', 'bot-message');
+  messageElement.innerHTML = `<p>${message}</p>`;
+  messageContainer.appendChild(messageElement);
+}
+
+function processUserInput() {
+  const userMessage = userInput.value;
+  addUserMessage(userMessage);
+  userInput.value = '';
+
+  // Processar a mensagem do usuário e gerar uma resposta do bot
+  const botMessage = generateBotResponse(userMessage);
+  addBotMessage(botMessage);
+}
+
+function generateBotResponse(userMessage) {
+  // Definir um fluxo de respostas do bot baseado nas respostas do usuário
+  let botMessage = '';
+  if (userMessage.includes('OK') || userMessage.includes('ok') || userMessage.includes('Ok')) {
+    botMessage = 'Os campos obrigatórios, vem preenchidos automaticamente baseado nos dados já preenchidos anteriormente, porém, é sempre bom conferir as informações e completar o que for necessário! <br><br> Obs: No campo telefone, o código da área é 5S. Por último, no campo dados, marque a opção para concordar com o uso da plataforma "JAGGAER". Por fim deve clicar no botão "Continuar" no campo superior direito da tela. <br><br> Quando estiver pronto me avise, OK? <br><br> Digite: Prosseguir';
+  } else if (userMessage.includes('Prosseguir') || userMessage.includes('prosseguir')) {
+    botMessage = 'Na aba contatos, as informações já estarão preenchidas conforme dados informados ao enviarmos o convite. Se quiser adicionar um novo contato, deverá clicar no ícone de novo usuário. <br><br> Ao preencher os dados básicos (nome e e-mail do novo contato) deverá ativar a opção "Acesso ao portal", crie o nome de usuário para o novo contato, e marque a caixa Kohler: Supplier. <br><br> Após, basta clicar no botão "Salvar" no canto superior direito da tela. <br><br> Se tudo correu bem, digite: Avançar.';
+  } else if (userMessage.includes('Avançar') || userMessage.includes('avançar')) {
+    botMessage = 'Vamos prosseguir, <br><br> A próxima aba é "Categorias", é a parte do cadastro que mais gera dúvidas! <br><br> Neste campo você deve indicar a categoria da empresa conforme o CNAE que consta no cartão CNPJ. Vou te dar uma dica, utilize o campo de pesquisa e digite algumas palavras chaves em relação a sua atividade. <br><br> Ao lado direito, selecione a categoria principal conforme opção selecionado. <br><br> Clique no botão continuar. Se está tudo OK, Digite: Correto.';
+  } else if (userMessage.includes('Correto') || userMessage.includes('correto')) {
+    botMessage = 'A aba perfil é subdividida em 4 guias, todos os campos obrigatórios devem ser preenchidos, eles estão marcados com o asterisco. A cada guia preenchida, você deverá clicar no botão salvar. Após concluído, o botão "Publicar" ficará habilitado e você poderá publicar seu perfil. <br><br> Obs: Quando faltar itens obrigatórios, aparecerá o quadro amarelo indicando quais itens faltam serem completados. <br><br> Para avançarmos digite: Seguir.';
+  } else if (userMessage.includes('Seguir') || userMessage.includes('seguir')) {
+    botMessage = 'Muito bem, esta é a seção: Detalhando abas. <br><br> A primeira é a "Geral". Avalie os campos obrigatórios destacados em laranja e marcado com o asterisco. Nesta aba, os campos obrigatórios são os das imagens acima, que basicamente são os termos de código e conduta do fornecedor. <br><br> Todas as opções deverão ser marcadas com "SIM", independente da área de atuação. <br><br> Caso haja algum questionamento em relação aos termos indicados pelo fornecedor, deveremos direcionar ao nosso setor jurídico que passará as devidas orientações. <br><br> Após responder as perguntas, digite: Perfeito.';
+  } else if (userMessage.includes('Perfeito') || userMessage.includes('perfeito')) {
+    botMessage = 'A próxima aba é "Negócios". O primeiro campo é o da imagem ao lado, avalie que o mesmo não possui o asterisco, ou seja, não é obrigatório. Este campo somente deve ser preenchido se o alfabeto for diferente do romano (japonês, chinês, árabe...) <br><br> Esta primeira pergunta deve ser marcada como sim, se a empresa for matriz, e não caso se trate de filial. <br><br> Estas perguntas são bem particulares de cada empresa. A pergunta em destaque que remete a Kohler, poderá marcar como "NÃO", visto que o fornecedor não terá acesso a informações pessoais de nossos colaboradores. O "ramo de negócio" e o "Principal setor" a resposta poderá ser a mesma. <br><br> A região primária, será "América do Sul" após clicar no botão salvar. <br><br> Quando concluir a atividade me digite: Pronto.';
+  } else if (userMessage.includes('Pronto') || userMessage.includes('pronto')) {
+    botMessage = 'OK, vamos para aba "Certificados". Aqui se trata de questões ambientais, onde você deverá marcar as opções conforme materiais produzidos por você. <br><br> O campo "Eu li e concordo com o Manual de Qualidade do Fornecedor", deverá ser marcado com "SIM", independente da sua área de atuação. <br><br> As perguntas geralmente serão respondidas como "NÃO", visto que nossos fornecedores prestarão serviços as nossas unidades no Brasil, e não realização transições via EDI. <br><br> No caso da pergunta sobre certificados de seguro, depende da empresa. <br><br> Quando concluir esta etapa, Digite: Tudo correto';
+  } else if (userMessage.includes('Tudo Correto') || userMessage.includes('Tudo correto') || userMessage.includes('tudo correto')) {
+    botMessage = 'Na aba "Logística", não há campos obrigatórios a serem preenchidos, podendo clicar no botão salvar e prosseguir para última aba de "Comércio Internacional". Nesta aba, contém as duas perguntas: A primeira sobre a USMCA e em seguida a C-TPAT (Parceria Alfandegária-Comercial Contra o Terrorismo), as mesmas são específicas da America do Norte, podendo você fornecedor marcar "NÃO" para ambas as respostas. <br><br> Após responder estas questões, clique no botão salvar e posteriormente no botão publicar. <br><br> Digite: Compreendido.';
+  } else if (userMessage.includes('Compreendido') || userMessage.includes('compreendido')) {
+    botMessage = 'Após a publicação do perfil, o cadastro irá passar por algumas aprovações internas a você receberá posteriormente um e-mail solicitando as informações bancárias, esta é a última parte do cadastro e deverá ser corretamente preenchida, para que a KOHLER possa prosseguir com os processos de compra. <br><br> Digite: Vamos prosseguir.';
+  } else if (userMessage.includes('Vamos Prosseguir') || userMessage.includes('vamos prosseguir') || userMessage.includes('Vamos prosseguir')) {
+    botMessage = 'Preencha todos os campos marcados com o asterisco. Estão destacados em amarelo, porém, contém asterisco. <br><br> Estes campos deverão ser preenchidos conforme seus dados bancários, incluindo o dígito. <br><br> Preencha o campo Unidade Monetária como: Brazilian real / BRL, no campo termos de pagamentos, poderá selecionar TED, Boleto ou Fatura, porém independente da informação selecionada deverá passar as informações bancárias <br><br> Nos próximos campos, deverá confirmar o endereço de faturamento. O campo recebedor alternativo deverá marcar "NÃO", selecionar somente "SIM" se a conta bancária do recebedor tiver CNPJ diferente do que está sendo cadastrado. Neste caso, você deverá preencher uma planilha com os dados do CNPJ do recebedor. (Esta situação acontece em casos de Matriz ou Filial). <br><br> Digite: Pronto';
+  } else if (userMessage.includes('Sem dúvidas') || userMessage.includes('sem dúvidas') || userMessage.includes('sem duvidas') || userMessage.includes('Sem duvidas')) {
+    botMessage = 'Em seguida, informe o nome do banco de recebimento. <br><br> O campo chave do Banco deverá ser preenchido conforme instruções. Que constam no quadro azul. O número do banco pode ser facilmente encontrado com uma busca na internet. <br><br> No campo "eu certifico que esse banco receberá apenas pagamento da KOHLER Brasil". <br> Marcar este campo com "SIM" visto que você prestará serviços apenas no Brasil. <br><br> Concluido esta etapa, digite: Sim';
+  } else if (userMessage.includes('Sim') || userMessage.includes('sim')) {
+    botMessage = 'Marcar não para pergunta sobre a empresa ter registro VAT. <br><br> Prrencha os campos conforme informações da empresa, SEM utilizar pontos, traços ou barras. Caso não possua Inscrição Estadual preencher como ISENTO. Caso não Possua Inscrição Municipal poderá deixar em branco. <br><br> Após concluir esta etapa, digite: Próximo ';
+  } else if (userMessage.includes('Próximo') || userMessage.includes('próximo') || userMessage.includes('proximo') || userMessage.includes('Proximo')) {
+    botMessage = 'No campo "Formulário de tributação", selecione a opção que indica o país Brasil. <br><br> Toda empresa recolhe impostos no Brasil, desta forma, deverá marcar "SIM" no campo "A empresa recolhe impostos?". No campo que se abre, você deverá ler atentamente as questões que constam no quadro azul. Basta copiar o texto, colar no campo amarelo (Descreva detalhes) respondendo as perguntas. <br><br> Estas informações você consegue com seu contador ou com o Setor Financeiro da empresa. <br> Mesmo sendo MEI, é obrigatório a resposta desta questão. <br><br> Digite: Concluído';
+  } else if (userMessage.includes('Afirmativo') || userMessage.includes('afirmativo')) {
+    botMessage = 'Chegamos a nossa etapa do <strong> cadastro E-PRO <strong>. <br><br> No campo abaixo, você deverá anexar um documento de comprovação da conta bancária. Deverá ser um dos documentos aceitos que estão descritos no quadro azul. <br><br> Em tipo de requisição deverá informar registrando um novo fornecedor, caso seja um fornecedor novo, ou se for apenas atualização/alteração de informação bancária deverá solicitar a opção correspondente. <br><br> Após clicar no botão "Salvar", seu cadastro será validado pelo Setor Financeiro da Kohler e após, será concluído, ou retornará para que você complete algumas informações. <br><br> Digite: Finalizado';
+  } else if (userMessage.includes('Finalizado') || userMessage.includes('finalizado')) {
+    botMessage = 'Muito Obrigado pela conclusão no seu cadastro E-PRO! A KOHLER desde já agradece a parceria, e deseja sucesso conjunto!';
+  } else {
+    botMessage = 'Desculpe, não entendi. Poderia repetir de outra forma?';
+  }
+  return botMessage;
+}
+
+userInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    processUserInput();
+  }
+});
+  </script>
+</body>
+</html>
